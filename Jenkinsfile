@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 cleanWs()
-                git branch: 'main', url: "https://github.com/techeer-jenkins/backend.git"
+                git branch: env.BRANCH_NAME, url: "https://github.com/techeer-jenkins/backend.git"
             }
         }
 

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from prometheus_fastapi_instrumentator import Instrumentator
+from fastapi.middleware.cors import CORSMiddleware
 
 import crud
 import models
@@ -10,6 +11,15 @@ from database import SessionLocal, engine
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+origins = ['*']
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 Instrumentator().instrument(app).expose(app)
 
 #Dependency

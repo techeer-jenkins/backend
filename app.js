@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // Import cors package
 const { register, httpRequestDurationMicroseconds, requestCount } = require('./metrics');
 const router = require('./routes');
 const { sequelize } = require('./models');
@@ -19,6 +20,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// CORS configuration to allow all origins
+app.use(cors());
+
 // Prometheus metrics endpoint
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', register.contentType);
@@ -31,7 +35,7 @@ app.get('/api/v2/', (req, res) => {
 
 app.use('/', router);
 
-app.listen(port, async () => {
+app.listen(port, '0.0.0.0', async () => {
   await sequelize.sync();
   console.log(`Server is running on port ${port}`);
 });

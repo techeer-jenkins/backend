@@ -3,6 +3,7 @@ const { User } = require('../models');
 
 const createUser = async (req, res) => {
   console.log("Hit createUser controller")
+  console.log(req.body)
   try {
     const { name, email } = req.body;
     const existingUser = await User.findOne({ where: { email } });
@@ -17,6 +18,7 @@ const createUser = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
+  console.log(req.query)
   console.log("Hit getUsers controller")
   const { skip = 0, limit = 100 } = req.query;
   const users = await User.findAll({ offset: parseInt(skip), limit: parseInt(limit) });
@@ -33,6 +35,7 @@ const getUserById = async (req, res) => {
 
 const loginUser = async (req, res) => {
   console.log("Hit loginUser controller")
+  console.log(req.body)
   const { name, email } = req.body;
 
   try {

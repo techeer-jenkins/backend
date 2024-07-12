@@ -2,6 +2,7 @@ const { Todo } = require('../models');
 
 const createTodo = async (req, res) => {
   console.log("Hit createTodo controller")
+  console.log(req.body)
   try {
     const { title, description } = req.body;
     const userId = req.params.userId;
@@ -16,6 +17,7 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   console.log("Hit getTodos controller")
+  console.log(req.params)
   const { skip = 0, limit = 100 } = req.query;
   const todos = await Todo.findAll({
     where: { ownerId: req.params.userId },

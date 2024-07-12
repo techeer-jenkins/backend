@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 // CORS configuration to allow all origins
-app.use(cors({ credentials: true }));
+app.use(cors());
 
 // Prometheus metrics endpoint
 app.get('/metrics', async (req, res) => {

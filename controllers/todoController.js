@@ -18,9 +18,10 @@ const createTodo = async (req, res) => {
 const getTodos = async (req, res) => {
   console.log("Hit getTodos controller")
   console.log(req.params)
+  const userId = req.params.userId;
   const { skip = 0, limit = 100 } = req.query;
   const todos = await Todo.findAll({
-    where: { ownerId: req.params.userId },
+    where: { ownerId: userId },
     offset: parseInt(skip),
     limit: parseInt(limit)
   });

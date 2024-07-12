@@ -12,6 +12,6 @@ router.post('/api/v2/users/:userId/todos', createTodo);
 router.post('/api/v2/login', loginUser);
 
 // Todo Routes
-router.get('/api/v2/todos', getTodos);
+router.get('/api/v2/:userID/todos', getTodos);
 
 module.exports = router;

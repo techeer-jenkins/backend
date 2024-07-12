@@ -6,8 +6,10 @@ const createTodo = async (req, res) => {
     const { title, description } = req.body;
     const userId = req.params.userId;
     const todo = await Todo.create({ title, description, ownerId: userId });
+    console.log(todo)
     res.json(todo);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: error.message });
   }
 };

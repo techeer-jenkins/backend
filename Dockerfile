@@ -1,10 +1,11 @@
-FROM python:3.10
+FROM node:18-alpine
 
-COPY . /backend
+WORKDIR /node-backend
 
-WORKDIR /backend
+COPY package.json .
 
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN npm install
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+COPY . .
+
+CMD ["npm", "start"]
